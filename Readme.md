@@ -10,7 +10,7 @@ go run main.go -env=dev
 ```
 Production
 ```sh
-go run main.go -env=dev
+go run main.go -env=prod
 ```
 Verify the deployment by navigating to your server address in
 your preferred browser.
