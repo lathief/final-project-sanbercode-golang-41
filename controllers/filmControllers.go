@@ -101,11 +101,14 @@ func DeleteFilm(c *gin.Context) {
 }
 
 func GetFilmById(c *gin.Context) {
+	var schedule []model.Schedule
 	var (
 		result gin.H
 	)
 	id, err := strconv.Atoi(c.Param("id"))
 	film, err := repository.GetFilmById(database.DbConnection, id)
+	schedule, _ = repository.GetScheduleByFilmCode(database.DbConnection, film.FilmCode)
+	film.Schedule = schedule
 	if err != nil {
 		result = gin.H{
 			"result": err,

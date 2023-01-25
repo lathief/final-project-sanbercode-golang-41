@@ -20,6 +20,8 @@ func StartServer() *gin.Engine {
 	authorized := router.Group("/", gin.BasicAuth(gin.Accounts{
 		"admin": "admin123",
 	}))
+	authorized.GET("/user", controllers.GetAllUserCustomer)
+
 	authorized.POST("/films", controllers.InsertFilm)
 	authorized.PUT("/films/:id", controllers.UpdateFilm)
 	authorized.DELETE("/films/:id", controllers.DeleteFilm)
@@ -34,7 +36,6 @@ func StartServer() *gin.Engine {
 
 	protectedRoutes := router.Group("/api")
 	protectedRoutes.Use(middleware.JWTAuthMiddleware())
-	protectedRoutes.GET("/user", controllers.GetAllUserCustomer)
 	protectedRoutes.POST("/user/order", controllers.OrderTicket)
 	protectedRoutes.POST("/user/update", controllers.UpdateProfile)
 	protectedRoutes.GET("/user/showticket", controllers.ShowTicket)
