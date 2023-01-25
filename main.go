@@ -42,6 +42,7 @@ func main() {
 		}
 		PORT = ":8081"
 	}
+	PORT = ":" + os.Getenv("PORT")
 	port, _ := strconv.Atoi(os.Getenv("DB_PORT"))
 	host := os.Getenv("DB_HOST")
 	user := os.Getenv("DB_USER")
